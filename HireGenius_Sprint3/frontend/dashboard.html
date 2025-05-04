@@ -1,12 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>HireGenius Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HireGenius Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .calendar-sidebar {
+      width: 260px;
+      background-color: #f8f8f8;
+      padding: 1rem;
+      height: 100vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    .container {
+      flex: 1;
+      padding: 2rem;
+      background: white;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .cards {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .card {
+      flex: 1 1 250px;
+      background: #f4f4f4;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .messages-sidebar {
+      width: 300px;
+      background-color: #f0f2f5;
+      border-left: 1px solid #ccc;
+      padding: 1rem;
+      overflow-y: auto;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .message {
+      background: #fff;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .message img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .message p {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-    <h1>Dashboard</h1>
-    <p>This is where users can view job listings and applications.</p>
+  <div class="calendar-sidebar">
+    <h3>📅 Schedule</h3>
+    <p>May 1: Resume Review</p>
+    <p>May 2: Portfolio Check</p>
+    <p>May 3: Backend Dev Sync</p>
+    <p>May 4: Design Team Catch-up</p>
+    <p>May 5: Hiring Call</p>
+    <p>May 6: Interview Prep</p>
+    <p>May 7: Product Demo</p>
+    <p>May 8: UX Interview</p>
+    <p>May 9: Engineering Handoff</p>
+    <p>May 10: Talent Fair</p>
+    <p>May 11: Resume Audit</p>
+    <p>May 12: Front-End Code Review</p>
+    <p>May 13: Behavioral Interview</p>
+    <p>May 14: Recruiter Screening</p>
+    <p>May 15: Engineering Sync</p>
+    <p>May 16: Team Lunch</p>
+    <p>May 17: Tech Talk</p>
+    <p>May 18: DevOps Roundtable</p>
+    <p>May 19: Security Audit</p>
+    <p>May 20: Marketing Review</p>
+    <p>May 21: UI Feedback Session</p>
+    <p>May 22: Backend Architecture</p>
+    <p>May 23: Final Interview</p>
+    <p>May 24: Offer Letter Prep</p>
+    <p>May 25: HR Meeting</p>
+    <p>May 26: CEO Sync</p>
+    <p>May 27: Orientation Planning</p>
+    <p>May 28: Campus Outreach</p>
+    <p>May 29: Strategy Review</p>
+    <p>May 30: Onboarding Overview</p>
+    <p>May 31: Developer Check-in</p>
+  </div>
+
+  <div class="container">
+    <h1>📊 HireGenius Dashboard</h1>
+
+    <div class="section">
+      <h2>👤 Welcome, [User]</h2>
+      <p>Use the dashboard to track applications, manage job posts, and schedule interviews.</p>
+    </div>
+
+    <div class="section cards">
+      <div class="card">
+        <h3>📄 Applications</h3>
+        <p>14 applications received</p>
+        <button class="btn">View</button>
+      </div>
+      <div class="card">
+        <h3>🛠️ Job Posts</h3>
+        <p>3 active postings</p>
+        <button class="btn">Manage</button>
+      </div>
+      <div class="card">
+        <h3>📆 Upcoming Interviews</h3>
+        <p>2 interviews this week</p>
+        <button class="btn">Schedule</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📁 Recent Job Applications</h2>
+      <table>
+        <thead>
+          <tr><th>Candidate</th><th>Position</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jane Doe</td><td>UX Designer</td><td>Interview Scheduled</td><td><button class="btn">View</button></td></tr>
+          <tr><td>John Smith</td><td>Software Engineer</td><td>New</td><td><button class="btn">Review</button></td></tr>
+          <tr><td>Emily Lin</td><td>Data Analyst</td><td>Shortlisted</td><td><button class="btn">Message</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>📌 Quick Links</h2>
+      <ul>
+        <li><a href="index.html">🏠 Go to Homepage</a></li>
+        <li><a href="joblistings.html">📋 Manage Listings</a></li>
+        <li><a href="profile.html">👤 View Profile</a></li>
+        <li><a href="settings.html">⚙️ Settings</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="messages-sidebar">
+    <h3>💬 Messages</h3>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=1"><p><strong>Sarah T:</strong><br>Hi, I just applied for the UX role!</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=2"><p><strong>Mike L:</strong><br>Can we schedule an interview for Friday?</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=3"><p><strong>Jamie R:</strong><br>Thanks again for the resume tips!</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=4"><p><strong>Dev P:</strong><br>Here’s the updated job description you asked for.</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=5"><p><strong>Karen M:</strong><br>Is there a remote marketing job available?</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=6"><p><strong>Alex J:</strong><br>Looking forward to the onboarding!</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=7"><p><strong>Emma L:</strong><br>I'll upload my resume this evening.</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=8"><p><strong>John D:</strong><br>Any roles open for data scientists?</p></div>
+  </div>
 </body>
 </html>

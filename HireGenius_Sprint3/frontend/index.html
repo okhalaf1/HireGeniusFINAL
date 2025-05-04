@@ -1,13 +1,734 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>HireGenius</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HireGenius</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      flex: 1;
+      padding: 2rem;
+      background: white;
+      position: relative;
+    }
+    .topbar {
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+    }
+    .menu-button {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      color: #333;
+      border-bottom: 1px solid #eee;
+    }
+    .dropdown-menu a:hover {
+      background-color: #f2f2f2;
+    }
+    .messages-sidebar {
+      width: 300px;
+      background-color: #f0f2f5;
+      border-left: 1px solid #ccc;
+      padding: 1rem;
+      overflow-y: auto;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .message {
+      background: #fff;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .message img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .message p {
+      margin: 0;
+    }
+    .gold-stars {
+      color: gold;
+      font-size: 1.2em;
+    }
+    .reviews {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .reviews img {
+      margin-bottom: 1rem;
+      max-width: 300px;
+    }
+    .reviews p {
+      font-style: italic;
+      color: #555;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .search-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+    .search-bar input[type="text"] {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    .search-bar input[type="text"]:first-child {
+      max-width: 70%;
+    }
+    .resume-upload {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #eef1f4;
+      border-radius: 8px;
+    }
+    .resume-upload textarea {
+      width: 100%;
+      height: 150px;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to HireGenius</h1>
+<div class="calendar-sidebar">
+  <h3>📅 Schedule</h3>
+  <div style="margin-top: 1rem;">
+    <div style="background-color: #4caf50; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 1, 9:00 AM - Kickoff Meeting
+    </div>
+    <div style="background-color: #2196f3; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 2, 11:00 AM - Design Sync
+    </div>
+    <div style="background-color: #ff9800; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 3, 1:00 PM - Resume Workshop
+    </div>
+    <div style="background-color: #9c27b0; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 4, 3:00 PM - Panel Interview
+    </div>
+    <div style="background-color: #4caf50; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 5, 10:00 AM - Engineering Call
+    </div>
+    <div style="background-color: #2196f3; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 6, 2:30 PM - Marketing Interview
+    </div>
+    <div style="background-color: #ff9800; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 7, 9:00 AM - Onboarding Prep
+    </div>
+    <div style="background-color: #9c27b0; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 8, 3:00 PM - HR Call
+    </div>
+    <div style="background-color: #4caf50; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 9, 12:00 PM - Finance Team Sync
+    </div>
+    <div style="background-color: #2196f3; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 10, 1:00 PM - Job Fair Prep
+    </div>
+    <div style="background-color: #ff9800; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 11, 11:00 AM - Resume Review
+    </div>
+    <div style="background-color: #9c27b0; color: white; padding: 0.3rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+      May 12, 3:30 PM - Final Interview
+    </div>
+    <!-- Add more as needed -->
+  </div>
+</div>
+
+  <div class="container">
+<h1>👋 Welcome to HireGenius</h1>
+<p>A platform to connect employers with job seekers.</p>
+
+<div id="ai-chatbox" style="margin-top: 2rem; background: #eef7ff; padding: 1.5rem; border-radius: 10px;">
+  <h2>🤖 HireGenius AI Chat Assistant</h2>
+  <div id="chat-window" style="height: 300px; overflow-y: auto; background: white; padding: 1rem; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 1rem;">
+    <div><strong>AI:</strong> Hi there! Tell me about your skills and experience, and I’ll recommend a job.</div>
+  </div>
+  <input id="userInput" type="text" placeholder="Type your experience here..." style="width: 80%; padding: 0.5rem; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;" />
+  <button onclick="sendToAI()" style="padding: 0.5rem 1rem; background: #007bff; color: white; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer;">Send</button>
+</div>
+
+
+<!-- AI Assistant Start -->
+<div style="background: #eef7ff; padding: 1.5rem; margin-top: 1rem; border-radius: 10px;">
+  <h2>🤖 HireGenius AI Assistant</h2>
+  <p>Describe your skills or experience and let AI recommend a job:</p>
+  <textarea id="aiInput" placeholder="e.g. I have 2 years of UX experience and I'm great with Figma and user research..." style="width: 100%; height: 100px; padding: 0.5rem;"></textarea>
+  <br><br>
+  <button onclick="showJobRecommendation()" style="padding: 0.6rem 1.2rem; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">🔍 Get Recommendations</button>
+</div>
+
+<!-- Modal Popup -->
+<div id="jobModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background:white; width:500px; max-width:90%; padding:2rem; border-radius:10px; position:relative;">
+    <span onclick="document.getElementById('jobModal').style.display='none'" style="position:absolute; top:10px; right:20px; font-size:24px; cursor:pointer;">&times;</span>
+    <h3 id="jobTitle">💼 Recommended Job</h3>
+    <p id="jobDesc" style="margin-bottom:1rem;"></p>
+    <canvas id="skillChart" width="400" height="200"></canvas>
+  </div>
+</div>
+<!-- AI Assistant End -->
+
+
+    <div class="topbar">
+      <button class="menu-button" onclick="toggleMenu()">☰</button>
+      <div class="dropdown-menu" id="menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="#">🔐 Login</a>
+        <a href="#">📝 Register</a>
+        <a href="#">📋 Job Listings</a>
+        <a href="#">📄 Upload Resume</a>
+        <a href="#">📨 Messages</a>
+
+      </div>
+    </div>
+
+
     <p>A platform to connect employers with job seekers.</p>
-    <script src="script.js"></script>
+
+    <div class="search-bar">
+      <input type="text" placeholder="🔍 Search for a job...">
+      <input type="text" placeholder="📍 Location">
+    </div>
+
+    <div class="nav-buttons">
+      <button onclick="showSection('login')">🔐 Login</button>
+      <button onclick="showSection('signup')">📝 Sign Up</button>
+      <button onclick="loadJobs()">📋 View Job Listings</button>
+    </div>
+
+    <div id="login" class="hidden">
+      <h2>🔐 Login</h2>
+      <input type="email" placeholder="📧 Email" id="loginEmail" />
+      <input type="password" placeholder="🔑 Password" id="loginPassword" />
+      <button onclick="submitLogin()" id="loginBtn">Submit</button>
+      <p id="loginMessage" class="success-message"></p>
+    </div>
+
+    <div id="signup" class="hidden">
+      <h2>📝 Sign Up</h2>
+      <input type="text" placeholder="👤 Full Name" id="signupName" />
+      <input type="email" placeholder="📧 Email" id="signupEmail" />
+      <input type="password" placeholder="🔑 Password" id="signupPassword" />
+      <button onclick="submitSignup()" id="signupBtn">Register</button>
+      <p id="signupMessage" class="success-message"></p>
+    </div>
+
+    <div id="jobs" class="hidden" style="max-height: 600px; overflow-y: auto;">
+  <h2>📋 Job Listings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Position</th>
+        <th>Salary</th>
+        <th>Requirements</th>
+        <th>Location</th>
+        <th>Type</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>TechNova</td><td>Software Engineer</td><td>$95,000</td><td>Bachelor's in CS, 2+ yrs exp</td><td>San Francisco, CA</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>Brandly</td><td>Marketing Coordinator</td><td>$50,000</td><td>BA in Marketing, SEO knowledge</td><td>Austin, TX</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>DataVis</td><td>Data Analyst</td><td>$70,000</td><td>Excel, SQL, Python</td><td>New York, NY</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>DesignFuel</td><td>UX/UI Designer</td><td>$85,000</td><td>Figma, Adobe XD, portfolio</td><td>Remote</td><td>Contract</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>Supportly</td><td>Customer Support Rep</td><td>$40,000</td><td>Good communication, CRM tools</td><td>Orlando, FL</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>Productly</td><td>Product Manager</td><td>$110,000</td><td>Agile, team leadership, BA/BS</td><td>Seattle, WA</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>InstaReach</td><td>Social Media Intern</td><td>$15/hr</td><td>Passion for social platforms</td><td>Remote</td><td>Part-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>LogiCorp</td><td>Warehouse Associate</td><td>$18/hr</td><td>High school diploma, lifting 50lbs</td><td>Chicago, IL</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>GreenTech</td><td>Environmental Engineer</td><td>$78,000</td><td>BS in Environmental Science</td><td>Denver, CO</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>RetailPro</td><td>Sales Associate</td><td>$30,000</td><td>Retail experience preferred</td><td>Phoenix, AZ</td><td>Part-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>Finlytics</td><td>Financial Analyst</td><td>$88,000</td><td>Excel, modeling, finance degree</td><td>Boston, MA</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+      <tr><td>CloudNet</td><td>DevOps Engineer</td><td>$105,000</td><td>CI/CD, AWS, scripting</td><td>Remote</td><td>Full-Time</td><td><button style="background:#007bff;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">Apply</button></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="resume-upload">
+      <h2>📄 Submit Your Resume</h2>
+      <p>You can upload your resume as a PDF or type it directly below.</p>
+      <input type="file" accept=".pdf">
+      <p>or</p>
+      <textarea placeholder="🖊️ Type or paste your resume here..."></textarea>
+      <button onclick="alert('Resume submitted successfully!')">Submit Resume</button>
+    </div>
+
+    <div class="reviews">
+      <h3>What Our Users Say</h3>
+      <img src="images/213-2133603_reviews-on-google-business-google-reviews-logo-png.png" alt="Google Reviews">
+      <p><span class="gold-stars">★★★★★</span> - "This platform helped me land my dream job!" - Sarah T.</p>
+      <p><span class="gold-stars">★★★★★</span> - "As a recruiter, it saved me so much time filtering candidates." - Mike L.</p>
+      <p><span class="gold-stars">★★★★★</span> - "I found my first internship through HireGenius within a week!" - Jamie R.</p>
+      <p><span class="gold-stars">★★★★☆</span> - "Great tool, just wish it had more remote listings." - Karen M.</p>
+      <p><span class="gold-stars">★★★★★</span> - "Intuitive and easy to use. Highly recommended." - Dev P.</p>
+    </div>
+  </div>
+
+  <div class="messages-sidebar">
+    <h3>💬 Messages</h3>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=1"><p><strong>Sarah T:</strong><br>Hi, I just applied for the UX role!</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=2"><p><strong>Mike L:</strong><br>Can we schedule an interview for Friday?</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=3"><p><strong>Jamie R:</strong><br>Thanks again for the resume tips!</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=4"><p><strong>Dev P:</strong><br>Here’s the updated job description you asked for.</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=5"><p><strong>Karen M:</strong><br>Is there a remote marketing job available?</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=6"><p><strong>Alex J:</strong><br>Looking forward to the onboarding!</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=7"><p><strong>Emma L:</strong><br>I'll upload my resume this evening.</p></div>
+    <div class="message"><img src="https://i.pravatar.cc/40?img=8"><p><strong>John D:</strong><br>Any roles open for data scientists?</p></div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+  <script src="script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function showJobRecommendation() {
+  const input = document.getElementById("aiInput").value.toLowerCase();
+  const modal = document.getElementById("jobModal");
+  const jobTitle = document.getElementById("jobTitle");
+  const jobDesc = document.getElementById("jobDesc");
+
+  let match = "";
+  let desc = "";
+  let matched = 0;
+  let unmatched = 0;
+
+  const jobs = [
+    {
+      title: "🎨 UX/UI Designer at DesignFuel",
+      desc: "Create engaging interfaces with tools like Figma and Adobe XD.",
+      keywords: ["ux", "ui", "figma", "design", "user research"]
+    },
+    {
+      title: "💻 Software Engineer at TechNova",
+      desc: "Build scalable applications with JavaScript and Node.js.",
+      keywords: ["javascript", "node", "backend", "frontend", "software"]
+    },
+    {
+      title: "📊 Data Analyst at DataVis",
+      desc: "Analyze business metrics using Python, SQL, and Excel.",
+      keywords: ["data", "python", "sql", "excel", "analytics"]
+    },
+    {
+      title: "📢 Marketing Coordinator at Brandly",
+      desc: "Drive campaigns with SEO and social media expertise.",
+      keywords: ["seo", "marketing", "social", "branding", "content"]
+    }
+  ];
+
+  for (let job of jobs) {
+    const hits = job.keywords.filter(kw => input.includes(kw)).length;
+    if (hits > matched) {
+      matched = hits;
+      unmatched = job.keywords.length - hits;
+      match = job.title;
+      desc = job.desc;
+    }
+  }
+
+  if (matched === 0) {
+    jobTitle.innerText = "❓ No Strong Match Found";
+    jobDesc.innerText = "Try entering more detailed or different keywords related to your skills.";
+    drawChart([0, 5]);
+  } else {
+    jobTitle.innerText = match;
+    jobDesc.innerText = desc;
+    drawChart([matched, unmatched]);
+  }
+
+  modal.style.display = "flex";
+}
+
+function drawChart(data) {
+  const ctx = document.getElementById('skillChart').getContext('2d');
+  if (window.skillChart) window.skillChart.destroy(); // avoid duplicate charts
+  window.skillChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Matched Skills', 'Unmatched Skills'],
+      datasets: [{
+        label: 'Skill Fit',
+        data: data,
+        backgroundColor: ['#28a745', '#dc3545'] // green and red
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+}
+</script>
+
+<style>
+  .popup {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    z-index: 9999;
+  }
+
+  .popup.hidden {
+    display: none;
+  }
+
+  .popup .close-btn {
+    float: right;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
+  .ai-section {
+    background-color: #eef1f4;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .ai-section textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<script>
+  function showRecommendations() {
+    document.getElementById("popup").classList.remove("hidden");
+  }
+
+  function closePopup() {
+    document.getElementById("popup").classList.add("hidden");
+  }
+</script>
+
+<style>
+  .popup {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    z-index: 9999;
+  }
+
+  .popup.hidden {
+    display: none;
+  }
+
+  .popup .close-btn {
+    float: right;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
+  .ai-section {
+    background-color: #eef1f4;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+  }
+
+  .ai-section textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .ai-section button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function showRecommendations() {
+    document.getElementById("popup").classList.remove("hidden");
+  }
+
+  function closePopup() {
+    document.getElementById("popup").classList.add("hidden");
+  }
+</script>
+
+<script>
+function showJobRecommendation() {
+  const input = document.getElementById("aiInput").value.toLowerCase();
+  const modal = document.getElementById("jobModal");
+  const jobTitle = document.getElementById("jobTitle");
+  const jobDesc = document.getElementById("jobDesc");
+
+  let match = "";
+  let desc = "";
+  let matched = 0;
+  let unmatched = 0;
+
+  const jobs = [
+    {
+      title: "🎨 UX/UI Designer at DesignFuel",
+      desc: "Create engaging interfaces with tools like Figma and Adobe XD.",
+      keywords: ["ux", "ui", "figma", "design", "user research"]
+    },
+    {
+      title: "💻 Software Engineer at TechNova",
+      desc: "Build scalable applications with JavaScript and Node.js.",
+      keywords: ["javascript", "node", "backend", "frontend", "software"]
+    },
+    {
+      title: "📊 Data Analyst at DataVis",
+      desc: "Analyze business metrics using Python, SQL, and Excel.",
+      keywords: ["data", "python", "sql", "excel", "analytics"]
+    },
+    {
+      title: "📢 Marketing Coordinator at Brandly",
+      desc: "Drive campaigns with SEO and social media expertise.",
+      keywords: ["seo", "marketing", "social", "branding", "content"]
+    }
+  ];
+
+  for (let job of jobs) {
+    const hits = job.keywords.filter(kw => input.includes(kw)).length;
+    if (hits > matched) {
+      matched = hits;
+      unmatched = job.keywords.length - hits;
+      match = job.title;
+      desc = job.desc;
+    }
+  }
+
+  if (matched === 0) {
+    jobTitle.innerText = "❓ No Strong Match Found";
+    jobDesc.innerText = "Try entering more specific or relevant keywords.";
+    drawChart([0, 5]);
+  } else {
+    jobTitle.innerText = match;
+    jobDesc.innerText = desc;
+    drawChart([matched, unmatched]);
+  }
+
+  modal.style.display = "flex";
+}
+
+function drawChart(data) {
+  const ctx = document.getElementById('skillChart').getContext('2d');
+  if (window.skillChart) window.skillChart.destroy();
+  window.skillChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Matched Skills', 'Unmatched Skills'],
+      datasets: [{
+        label: 'Skill Fit',
+        data: data,
+        backgroundColor: ['#28a745', '#dc3545']
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+}
+</script>
+
+<script>
+function sendToAI() {
+  const input = document.getElementById("userInput");
+  const chatWindow = document.getElementById("chat-window");
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Display user message
+  const userMessage = document.createElement("div");
+  userMessage.innerHTML = `<strong>You:</strong> ${text}`;
+  chatWindow.appendChild(userMessage);
+
+  // Analyze input
+  const lowerText = text.toLowerCase();
+  let response = "I'm not sure yet. Try mentioning your skills like 'Python', 'Figma', or 'SEO'.";
+
+  if (lowerText.includes("figma") || lowerText.includes("ux") || lowerText.includes("ui")) {
+    response = "You'd be a great fit for the 🎨 UX/UI Designer role at DesignFuel!";
+  } else if (lowerText.includes("python") || lowerText.includes("sql") || lowerText.includes("data")) {
+    response = "You should check out the 📊 Data Analyst position at DataVis!";
+  } else if (lowerText.includes("seo") || lowerText.includes("marketing") || lowerText.includes("social")) {
+    response = "Sounds like the 📢 Marketing Coordinator role at Brandly is perfect for you!";
+  } else if (lowerText.includes("javascript") || lowerText.includes("node") || lowerText.includes("software")) {
+    response = "The 💻 Software Engineer role at TechNova could be a great match!";
+
+  }
+
+  // Display AI response
+  const aiMessage = document.createElement("div");
+  aiMessage.innerHTML = `<strong>AI:</strong> ${response}`;
+  aiMessage.style.marginTop = "0.5rem";
+  chatWindow.appendChild(aiMessage);
+
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+  input.value = "";
+}
+</script>
+
+<script>
+function sendToAI() {
+  const input = document.getElementById("userInput");
+  const chatWindow = document.getElementById("chat-window");
+  const text = input.value.trim();
+  if (!text) return;
+
+  const userMessage = document.createElement("div");
+  userMessage.innerHTML = `<strong>You:</strong> ${text}`;
+  chatWindow.appendChild(userMessage);
+
+  const lowerText = text.toLowerCase();
+
+  const jobs = [
+    {
+      title: "🎨 UX/UI Designer at DesignFuel",
+      match: ["figma", "adobe xd", "ux", "ui", "user research", "wireframes", "design"],
+    },
+    {
+      title: "💻 Software Engineer at TechNova",
+      match: ["javascript", "node", "react", "html", "css", "api", "typescript", "web development"],
+    },
+    {
+      title: "📊 Data Analyst at DataVis",
+      match: ["python", "sql", "excel", "data", "pandas", "analytics", "statistics", "r"],
+    },
+    {
+      title: "📢 Marketing Coordinator at Brandly",
+      match: ["seo", "marketing", "branding", "social media", "content", "email campaigns"],
+    },
+    {
+      title: "📱 Mobile Developer at AppHive",
+      match: ["swift", "kotlin", "android", "ios", "flutter", "mobile development"],
+    },
+    {
+      title: "🛍️ E-commerce Manager at RetailPro",
+      match: ["shopify", "woocommerce", "product listings", "online store", "inventory"],
+    },
+    {
+      title: "📈 Financial Analyst at Finlytics",
+      match: ["finance", "modeling", "excel", "valuation", "accounting", "budgeting"],
+    },
+    {
+      title: "📦 Warehouse Manager at LogiCorp",
+      match: ["warehouse", "inventory", "logistics", "shipping", "packing", "forklift"],
+    },
+    {
+      title: "🎤 HR Manager at PeopleFirst",
+      match: ["recruiting", "onboarding", "benefits", "employee relations", "hr"],
+    },
+    {
+      title: "🧪 QA Tester at BugSquash",
+      match: ["testing", "selenium", "bug reports", "automation", "qa", "quality assurance"],
+    },
+    {
+      title: "🧑‍🏫 Education Coordinator at Learnly",
+      match: ["teaching", "curriculum", "lesson plans", "students", "education", "training"],
+    }
+  ];
+
+  let bestMatch = null;
+  let bestScore = 0;
+
+  for (const job of jobs) {
+    const hits = job.match.filter(keyword => lowerText.includes(keyword));
+    if (hits.length > bestScore) {
+      bestScore = hits.length;
+      bestMatch = job;
+    }
+  }
+
+  let response;
+  if (bestMatch) {
+    response = `Based on your input, I recommend: <br><strong>${bestMatch.title}</strong>`;
+  } else {
+    response = "Hmm, I couldn’t match that. Try including job-related keywords like 'python', 'seo', or 'design'.";
+  }
+
+  const aiMessage = document.createElement("div");
+  aiMessage.innerHTML = `<strong>AI:</strong> ${response}`;
+  aiMessage.style.marginTop = "0.5rem";
+  chatWindow.appendChild(aiMessage);
+
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+  input.value = "";
+}
+</script>
+
+
+
+
 </body>
 </html>
